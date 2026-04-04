@@ -1,12 +1,9 @@
+"use client";
+
 import Link from "next/link";
-import {
-  ArrowRight,
-  ListPlus,
-  HandHeart,
-  Truck,
-  Leaf,
-} from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { motion } from "framer-motion";
+import { ArrowRight, ListPlus, HandHeart, Truck, Leaf } from "lucide-react";
+import { BackgroundPaths } from "@/components/ui/background-paths";
 
 const steps = [
   {
@@ -29,112 +26,120 @@ const steps = [
   },
 ];
 
+
 export default function HomePage() {
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-50 to-white">
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-brand-200 blur-3xl" />
-          <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-brand-100 blur-3xl" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-brand-100 px-4 py-1.5 text-sm font-medium text-brand-700">
-              <Leaf className="h-4 w-4" />
-              Filling plates, not landfills
-            </div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl">
-              Rescue Food,{" "}
-              <span className="text-brand-600">Feed Communities</span>
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600">
-              SecondServing connects businesses with surplus food to households, food
-              banks, and composters in your neighborhood. See what&apos;s
-              available on the map, claim it, and pick it up — all in real time.
-            </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link href="/map">
-                <Button size="lg" className="gap-2">
-                  Find Food Near Me
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Hero — full-screen animated background */}
+      <BackgroundPaths title="Second Serving">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+          className="text-lg sm:text-xl text-gray-500 max-w-2xl mx-auto mb-4"
+        >
+          Connecting businesses with surplus food to households, food banks, and
+          composters in your neighborhood — all in real time.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.6 }}
+          className="mb-10 inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-1.5 text-sm font-medium text-green-700"
+        >
+          <Leaf className="h-4 w-4" />
+          Filling plates, not landfills
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.6 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <Link
+            href="/map"
+            className="inline-flex items-center gap-2 rounded-2xl bg-green-600 px-8 py-4 text-base font-medium text-white shadow-lg hover:bg-green-700 hover:-translate-y-0.5 transition-all duration-300 hover:shadow-xl"
+          >
+            Find Food Near Me
+            <ArrowRight className="h-5 w-5" />
+          </Link>
+
+          <Link
+            href="/register/business"
+            className="inline-flex items-center gap-2 rounded-2xl border border-green-200 bg-white/80 px-8 py-4 text-base font-medium text-green-700 backdrop-blur-sm hover:bg-green-50 hover:-translate-y-0.5 transition-all duration-300 shadow-sm hover:shadow-md"
+          >
+            List Your Surplus
+          </Link>
+        </motion.div>
+      </BackgroundPaths>
 
       {/* How It Works */}
-      <section className="py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-gray-900">How It Works</h2>
-            <p className="mt-3 text-gray-600">
-              Three simple steps to rescue surplus food
-            </p>
+      <section className="py-12 md:py-20 bg-white">
+        <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-16">
+          <div className="relative z-10 mx-auto max-w-xl space-y-6 text-center">
+            <h2 className="text-balance text-4xl font-medium lg:text-5xl text-gray-900">How It Works</h2>
+            <p className="text-gray-500">Three simple steps to reduce food waste</p>
           </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
+          <div className="relative mx-auto grid max-w-2xl lg:max-w-4xl divide-x divide-y border border-green-100 sm:grid-cols-3">
             {steps.map((step, idx) => (
-              <div
+              <motion.div
                 key={step.title}
-                className="group relative rounded-2xl border border-gray-200 bg-white p-8 text-center shadow-sm transition-all hover:shadow-md"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.15 }}
+                className="space-y-3 p-12"
               >
-                <div className="absolute -top-5 left-1/2 flex h-10 w-10 -translate-x-1/2 items-center justify-center rounded-full bg-brand-600 text-sm font-bold text-white shadow-md">
-                  {idx + 1}
+                <div className="flex items-center gap-2 text-green-700">
+                  <step.icon className="size-4" />
+                  <h3 className="text-sm font-medium">{step.title}</h3>
                 </div>
-                <div className="mx-auto mt-2 flex h-14 w-14 items-center justify-center rounded-xl bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-100">
-                  <step.icon className="h-7 w-7" />
-                </div>
-                <h3 className="mt-5 text-lg font-semibold text-gray-900">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm text-gray-500">
-                  {step.description}
-                </p>
-              </div>
+                <p className="text-sm text-gray-500">{step.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="bg-brand-600 py-16">
-        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Filling plates, not landfills
-          </h2>
-          <p className="mt-4 text-xl font-bold italic text-white">
-            Connecting surplus food with people who need it most.
-          </p>
-        </div>
-      </section>
-
       {/* CTA */}
-      <section className="py-20">
+      <section className="py-24 bg-green-50">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900">
-            Ready to Make a Difference?
-          </h2>
-          <p className="mt-4 text-gray-600">
-            Join thousands of businesses and community members already reducing
-            food waste in their neighborhoods.
-          </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link href="/register">
-              <Button size="lg">Find Food Near Me</Button>
-            </Link>
-            <Link href="/register/business">
-              <Button variant="outline" size="lg">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-balance text-4xl font-medium lg:text-5xl text-gray-900">
+              Ready to Make a Difference?
+            </h2>
+            <p className="mt-4 text-gray-500">
+              Join thousands of businesses and community members already reducing
+              food waste in their neighborhoods.
+            </p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Link
+                href="/register"
+                className="inline-flex items-center gap-2 rounded-2xl bg-green-600 px-8 py-4 text-base font-medium text-white shadow-md hover:bg-green-700 hover:-translate-y-0.5 transition-all duration-300"
+              >
+                Find Food Near Me
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+              <Link
+                href="/register/business"
+                className="inline-flex items-center gap-2 rounded-2xl border border-green-300 bg-white px-8 py-4 text-base font-medium text-green-700 hover:bg-green-50 hover:-translate-y-0.5 transition-all duration-300"
+              >
                 Register Your Business
-              </Button>
-            </Link>
-            <Link href="/listings">
-              <Button variant="outline" size="lg">
+              </Link>
+              <Link
+                href="/listings"
+                className="inline-flex items-center gap-2 rounded-2xl border border-green-300 bg-white px-8 py-4 text-base font-medium text-green-700 hover:bg-green-50 hover:-translate-y-0.5 transition-all duration-300"
+              >
                 Browse Listings
-              </Button>
-            </Link>
-          </div>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </>

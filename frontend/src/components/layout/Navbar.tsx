@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Leaf, Menu, X, MapPin, LayoutGrid } from "lucide-react";
+import { Menu, X, MapPin, LayoutGrid } from "lucide-react";
 import { clsx } from "clsx";
 import { Button } from "@/components/ui/Button";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -33,9 +33,6 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600">
-              <Leaf className="h-5 w-5 text-white" />
-            </div>
             <span className="text-xl font-bold text-gray-900">SecondServing</span>
           </Link>
 

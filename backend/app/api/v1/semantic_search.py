@@ -7,6 +7,7 @@ import logging
 from typing import Any
 
 import httpx
+from google import genai
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
@@ -18,7 +19,7 @@ router = APIRouter()
 settings = get_settings()
 
 PINECONE_HOST = "food-rescue-menus-xpxejgx.svc.aped-4627-b74a.pinecone.io"
-EMBEDDING_MODEL = "google/gemini-embedding-001"
+EMBEDDING_MODEL = "gemini-embedding-001"
 EMBEDDING_DIM = 768
 
 
@@ -28,21 +29,13 @@ class SemanticSearchRequest(BaseModel):
 
 
 def _get_embedding(text: str) -> list[float]:
-    resp = httpx.post(
-        f"{settings.OPENROUTER_BASE_URL}/embeddings",
-        headers={
-            "Authorization": f"Bearer {settings.OPENROUTER_API_KEY}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "input": [text],
-            "model": EMBEDDING_MODEL,
-            "dimensions": EMBEDDING_DIM,
-        },
-        timeout=30,
+    client = genai.Client(api_key=settings.GOOGLE_API_KEY)
+    result = client.models.embed_content(
+        model=EMBEDDING_MODEL,
+        contents=text,
+        config={"output_dimensionality": EMBEDDING_DIM},
     )
-    resp.raise_for_status()
-    return resp.json()["data"][0]["embedding"]
+    return result.embeddings[0].values
 
 
 def _query_pinecone(vector: list[float], top_k: int) -> list[dict[str, Any]]:
@@ -91,9 +84,9 @@ async def semantic_search(req: SemanticSearchRequest):
     if not req.query.strip():
         raise HTTPException(400, "Query must not be empty.")
 
-    if not settings.PINECONE_API_KEY or not settings.OPENROUTER_API_KEY:
+    if not settings.PINECONE_API_KEY or not settings.GOOGLE_API_KEY:
         raise HTTPException(
-            503, "Semantic search is not configured (missing PINECONE or OPENROUTER keys)."
+            503, "Semantic search is not configured (missing PINECONE or GOOGLE_API_KEY)."
         )
 
     try:
