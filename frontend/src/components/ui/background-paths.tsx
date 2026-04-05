@@ -12,14 +12,14 @@ export function FloatingPaths({ position }: { position: number }) {
     } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
       684 - i * 5 * position
     } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-    color: `rgba(188,108,80,${0.08 + i * 0.025})`,
+    color: `rgba(175,224,231,${0.08 + i * 0.025})`,
     width: 0.5 + i * 0.03,
   }));
 
   return (
     <div className="absolute inset-0 pointer-events-none">
       <svg
-        className="w-full h-full text-brand-500"
+        className="w-full h-full text-aqua"
         viewBox="0 0 696 316"
         fill="none"
       >

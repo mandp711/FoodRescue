@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ListPlus, HandHeart, Truck, Leaf, MapPin, Building2, LayoutGrid } from "lucide-react";
-import { BackgroundPaths, FloatingPaths } from "@/components/ui/background-paths";
-
+import { BackgroundPaths } from "@/components/ui/background-paths";
+import { FloatingPathsBackground } from "@/components/ui/floating-paths";
 
 const steps = [
   {
@@ -27,10 +27,9 @@ const steps = [
   },
 ];
 
-
 export default function HomePage() {
   return (
-    <div className="bg-white">
+    <FloatingPathsBackground position={1} className="min-h-screen">
       {/* Hero */}
       <BackgroundPaths title="Food Rescue">
         <motion.p
@@ -112,7 +111,7 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-balance text-4xl font-medium lg:text-5xl text-teal">
+            <h2 className="text-balance text-4xl font-medium lg:text-5xl text-brand-600">
               Ready to Make a Difference?
             </h2>
             <p className="mt-4 text-gray-500">
@@ -120,31 +119,31 @@ export default function HomePage() {
               food waste in their neighborhoods.
             </p>
             <div className="mt-10 flex flex-col gap-3 mx-auto max-w-lg text-left">
-              <Link href="/register" className="flex items-center justify-between rounded-xl bg-blue-50 px-5 py-4 ring-1 ring-blue-200 transition hover:bg-blue-100 hover:shadow-md">
+              <Link href="/register" className="flex items-center justify-between rounded-xl bg-brand-50 px-5 py-4 ring-1 ring-brand-200 transition hover:bg-brand-100 hover:shadow-md">
                 <span className="flex items-center gap-3">
-                  <MapPin size={20} className="text-blue-700" />
+                  <MapPin size={20} className="text-aqua-dark" />
                   <span className="text-sm font-semibold text-gray-900">Find Food Near Me</span>
                 </span>
-                <span className="text-xs font-medium text-blue-600 flex items-center gap-1">Get started <ArrowRight className="h-3 w-3" /></span>
+                <span className="text-xs font-medium text-brand-600 flex items-center gap-1">Get started <ArrowRight className="h-3 w-3" /></span>
               </Link>
-              <Link href="/register/business" className="flex items-center justify-between rounded-xl bg-blue-50 px-5 py-4 ring-1 ring-blue-200 transition hover:bg-blue-100 hover:shadow-md">
+              <Link href="/register/business" className="flex items-center justify-between rounded-xl bg-brand-50 px-5 py-4 ring-1 ring-brand-200 transition hover:bg-brand-100 hover:shadow-md">
                 <span className="flex items-center gap-3">
-                  <Building2 size={20} className="text-blue-700" />
+                  <Building2 size={20} className="text-aqua-dark" />
                   <span className="text-sm font-semibold text-gray-900">Register Your Business</span>
                 </span>
-                <span className="text-xs font-medium text-blue-600 flex items-center gap-1">Sign up <ArrowRight className="h-3 w-3" /></span>
+                <span className="text-xs font-medium text-brand-600 flex items-center gap-1">Sign up <ArrowRight className="h-3 w-3" /></span>
               </Link>
-              <Link href="/listings" className="flex items-center justify-between rounded-xl bg-blue-50 px-5 py-4 ring-1 ring-blue-200 transition hover:bg-blue-100 hover:shadow-md">
+              <Link href="/listings" className="flex items-center justify-between rounded-xl bg-brand-50 px-5 py-4 ring-1 ring-brand-200 transition hover:bg-brand-100 hover:shadow-md">
                 <span className="flex items-center gap-3">
-                  <LayoutGrid size={20} className="text-blue-700" />
+                  <LayoutGrid size={20} className="text-aqua-dark" />
                   <span className="text-sm font-semibold text-gray-900">Browse Listings</span>
                 </span>
-                <span className="text-xs font-medium text-blue-600 flex items-center gap-1">View all <ArrowRight className="h-3 w-3" /></span>
+                <span className="text-xs font-medium text-brand-600 flex items-center gap-1">View all <ArrowRight className="h-3 w-3" /></span>
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
-    </div>
+    </FloatingPathsBackground>
   );
 }
