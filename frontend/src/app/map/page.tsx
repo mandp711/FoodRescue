@@ -11,7 +11,7 @@ import {
   Navigation,
   TrendingUp,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { initGoogleMaps } from "@/lib/google-maps";
 import { AuthGuard } from "@/components/auth/AuthGuard";
 

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { X } from "lucide-react";
-import { SignInPage } from "@/components/ui/sign-in";
 import { createClient } from "@/lib/supabase";
 import { useAuthStore } from "@/store/useAuthStore";
 
@@ -72,15 +71,62 @@ export default function LoginPage() {
 
   return (
     <>
-      <SignInPage
-        title={<span className="text-brand-600">Welcome</span>}
-        description="Sign in to browse surplus food"
-onSignIn={handleSignIn}
-        onCreateAccount={() => setShowRegisterModal(true)}
-        onResetPassword={() => router.push("/login")}
-        error={error}
-        loading={loading}
-      />
+      <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
+        <div className="w-full max-w-sm">
+          <div className="mb-8 text-center">
+            <h1 className="text-2xl font-bold text-brand-600">Welcome</h1>
+            <p className="mt-1 text-sm text-gray-500">Sign in to browse surplus food</p>
+          </div>
+
+          <form onSubmit={handleSignIn} className="space-y-4 rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-100">
+            {error && (
+              <div className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700 ring-1 ring-red-200">
+                {error}
+              </div>
+            )}
+            <div>
+              <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-700">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="mb-1 block text-sm font-medium text-gray-700">Password</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200"
+                placeholder="••••••••"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-lg bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-brand-700 disabled:opacity-50"
+            >
+              {loading ? "Signing in…" : "Sign in"}
+            </button>
+          </form>
+
+          <p className="mt-5 text-center text-sm text-gray-500">
+            Don&apos;t have an account?{" "}
+            <button
+              type="button"
+              onClick={() => setShowRegisterModal(true)}
+              className="font-medium text-brand-600 hover:text-brand-700"
+            >
+              Create one
+            </button>
+          </p>
+        </div>
+      </div>
 
       {/* Register type modal */}
       {showRegisterModal && (

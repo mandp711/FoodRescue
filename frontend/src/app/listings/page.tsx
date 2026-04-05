@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { MapPin } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { AuthGuard } from "@/components/auth/AuthGuard";
 import { RestaurantsTable, type Restaurant } from "@/components/ui/restaurants-table";
 

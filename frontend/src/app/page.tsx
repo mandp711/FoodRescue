@@ -4,8 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, ListPlus, HandHeart, Truck, Leaf, MapPin, Building2, LayoutGrid } from "lucide-react";
 import { BackgroundPaths, FloatingPaths } from "@/components/ui/background-paths";
-import { Alert, AlertIcon, AlertTitle, AlertToolbar } from "@/components/ui/alert-1";
-import { Button } from "@/components/ui/button-1";
+
 
 const steps = [
   {
@@ -121,33 +120,27 @@ export default function HomePage() {
               food waste in their neighborhoods.
             </p>
             <div className="mt-10 flex flex-col gap-3 mx-auto max-w-lg text-left">
-              <Alert variant="mono" className="!bg-aqua !text-teal">
-                <AlertIcon><MapPin size={20} color="#5A2F25" /></AlertIcon>
-                <AlertTitle>Find Food Near Me</AlertTitle>
-                <AlertToolbar>
-                  <Button variant="inverse" mode="link" underlined="solid" size="sm" asChild>
-                    <Link href="/register">Get started <ArrowRight className="inline h-3 w-3" /></Link>
-                  </Button>
-                </AlertToolbar>
-              </Alert>
-              <Alert variant="mono" className="!bg-aqua !text-teal">
-                <AlertIcon><Building2 size={20} color="#5A2F25" /></AlertIcon>
-                <AlertTitle>Register Your Business</AlertTitle>
-                <AlertToolbar>
-                  <Button variant="inverse" mode="link" underlined="solid" size="sm" asChild>
-                    <Link href="/register/business">Sign up <ArrowRight className="inline h-3 w-3" /></Link>
-                  </Button>
-                </AlertToolbar>
-              </Alert>
-              <Alert variant="mono" className="!bg-aqua !text-teal">
-                <AlertIcon><LayoutGrid size={20} color="#5A2F25" /></AlertIcon>
-                <AlertTitle>Browse Listings</AlertTitle>
-                <AlertToolbar>
-                  <Button variant="inverse" mode="link" underlined="solid" size="sm" asChild>
-                    <Link href="/listings">View all <ArrowRight className="inline h-3 w-3" /></Link>
-                  </Button>
-                </AlertToolbar>
-              </Alert>
+              <Link href="/register" className="flex items-center justify-between rounded-xl bg-blue-50 px-5 py-4 ring-1 ring-blue-200 transition hover:bg-blue-100 hover:shadow-md">
+                <span className="flex items-center gap-3">
+                  <MapPin size={20} className="text-blue-700" />
+                  <span className="text-sm font-semibold text-gray-900">Find Food Near Me</span>
+                </span>
+                <span className="text-xs font-medium text-blue-600 flex items-center gap-1">Get started <ArrowRight className="h-3 w-3" /></span>
+              </Link>
+              <Link href="/register/business" className="flex items-center justify-between rounded-xl bg-blue-50 px-5 py-4 ring-1 ring-blue-200 transition hover:bg-blue-100 hover:shadow-md">
+                <span className="flex items-center gap-3">
+                  <Building2 size={20} className="text-blue-700" />
+                  <span className="text-sm font-semibold text-gray-900">Register Your Business</span>
+                </span>
+                <span className="text-xs font-medium text-blue-600 flex items-center gap-1">Sign up <ArrowRight className="h-3 w-3" /></span>
+              </Link>
+              <Link href="/listings" className="flex items-center justify-between rounded-xl bg-blue-50 px-5 py-4 ring-1 ring-blue-200 transition hover:bg-blue-100 hover:shadow-md">
+                <span className="flex items-center gap-3">
+                  <LayoutGrid size={20} className="text-blue-700" />
+                  <span className="text-sm font-semibold text-gray-900">Browse Listings</span>
+                </span>
+                <span className="text-xs font-medium text-blue-600 flex items-center gap-1">View all <ArrowRight className="h-3 w-3" /></span>
+              </Link>
             </div>
           </motion.div>
         </div>

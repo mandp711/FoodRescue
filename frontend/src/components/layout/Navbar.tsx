@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, MapPin, LayoutGrid } from "lucide-react";
 import { clsx } from "clsx";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { useAuthStore } from "@/store/useAuthStore";
 import { createClient } from "@/lib/supabase";
 
