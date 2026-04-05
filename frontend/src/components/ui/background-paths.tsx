@@ -2,45 +2,45 @@
 
 import { motion } from "framer-motion";
 
-export function FloatingPaths({ position }: { position: number }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
+function HeroPaths({ position }: { position: number }) {
+  const paths = Array.from({ length: 18 }, (_, i) => ({
     id: i,
-    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-      380 - i * 5 * position
-    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-      152 - i * 5 * position
-    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-      684 - i * 5 * position
-    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-    color: `rgba(175,224,231,${0.08 + i * 0.025})`,
-    width: 0.5 + i * 0.03,
+    d: `M-${380 - i * 8 * position} -${189 + i * 10}C-${
+      380 - i * 8 * position
+    } -${189 + i * 10} -${312 - i * 8 * position} ${216 - i * 10} ${
+      152 - i * 8 * position
+    } ${343 - i * 10}C${616 - i * 8 * position} ${470 - i * 10} ${
+      684 - i * 8 * position
+    } ${875 - i * 10} ${684 - i * 8 * position} ${875 - i * 10}`,
+    width: 0.7 + i * 0.1,
   }));
 
   return (
-    <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
       <svg
-        className="w-full h-full text-aqua"
+        className="w-full h-full"
         viewBox="0 0 696 316"
         fill="none"
+        preserveAspectRatio="xMidYMid slice"
       >
         <title>Background Paths</title>
         {paths.map((path) => (
           <motion.path
             key={path.id}
             d={path.d}
-            stroke="currentColor"
+            stroke="#60a5fa"
             strokeWidth={path.width}
-            strokeOpacity={0.08 + path.id * 0.025}
-            initial={{ pathLength: 0.3, opacity: 0.6 }}
+            strokeOpacity={0.2 + path.id * 0.035}
+            initial={{ pathLength: 0, opacity: 0, pathOffset: 0 }}
             animate={{
               pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
+              opacity: [0.4, 0.7, 0.4],
+              pathOffset: [0, 1],
             }}
             transition={{
-              duration: 20 + Math.random() * 10,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
+              pathLength: { duration: 2 + path.id * 0.2, ease: "easeOut" },
+              opacity: { duration: 6 + path.id * 0.5, repeat: Infinity, ease: "easeInOut" },
+              pathOffset: { duration: 10 + path.id * 0.8, repeat: Infinity, ease: "linear" },
             }}
           />
         ))}
@@ -51,7 +51,6 @@ export function FloatingPaths({ position }: { position: number }) {
 
 export function BackgroundPaths({
   title = "Background Paths",
-  bare = false,
   children,
 }: {
   title?: string;
@@ -62,6 +61,7 @@ export function BackgroundPaths({
 
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center">
+      <HeroPaths position={1} />
 
       <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
         <motion.div
@@ -84,7 +84,7 @@ export function BackgroundPaths({
                       stiffness: 150,
                       damping: 25,
                     }}
-                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#304C53] to-[#BC6C50]"
+                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-900 to-blue-600/80"
                   >
                     {letter}
                   </motion.span>
